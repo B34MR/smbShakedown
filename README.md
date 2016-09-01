@@ -36,7 +36,7 @@
 
 #To do:
     SMTP Anonymous Auth option
-    MSF Console option(auxiliary/server/capture/smb)
+    Option to automagically launch MSF Console (auxiliary/server/capture/smb)
     Multiple recipient address support.
     SMTP local server option
     Create forked version.
