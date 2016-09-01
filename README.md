@@ -26,7 +26,7 @@
     (Will add in support to automatically launch MSF Console with auxiliary/server/capture/smb)
 
 #To do:
-    SMTP Auth option
+    SMTP Anonymous Auth option
     MSF Console option(auxiliary/server/capture/smb)
     Multiple recipient address support.
     SMTP local server option
