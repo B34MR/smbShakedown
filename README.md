@@ -10,6 +10,7 @@
     1.Configure SMTP Relay server address.
     
     2.Enter SMTP Relay server credentials. (anonymous connections not yet supported.)
+    
     3.Configure "from" and "to" addresses.
     
     4.Enter SMBCapture Server IP address, so it can be place in body of email 
