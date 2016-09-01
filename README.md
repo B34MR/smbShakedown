@@ -13,7 +13,7 @@
     
     3.Configure "from" and "to" addresses.
     
-    4.Enter SMBCapture Server IP address, so it can be place in body of email 
+    4.Enter SMBCapture Server IP address, so it can be placed in body of email 
     EX: <img src=file://127.0.0.1/image/foo.gif>
     *Verify this is the external IP address*
     
@@ -28,10 +28,10 @@
     
     3.Configure "from" and "to" addresses.
     
-    4.Enter SMBCapture Server IP address, so it can be place in body of email 
+    4.Enter SMBCapture Server IP address, so it can be placed in body of email 
     EX: <img src=file://127.0.0.1/image/foo.gif>
     
-    5.SMBCapture Server can be hosted locally since your testing an internal network right?
+    5.SMBCapture Server can be hosted locally when testing internal network.
     (Will add in support to automatically launch MSF Console with auxiliary/server/capture/smb)
 
 #To do:
