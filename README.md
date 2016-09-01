@@ -1,6 +1,6 @@
 # smbShakedown.py
   Description: A simplified SMB Email Client Attack script used for External/Internal pentests.
-  Created by: Nick Sanzotta / @beamr
+  #Created by: Nick Sanzotta / @beamr
   Version: smbShakedown.py v 1.0
 
 #External Pentest
