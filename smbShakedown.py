@@ -64,10 +64,10 @@ def main():
 	print('ENTERED:' "%s" % senderName + "\n")
 	senderAddress = raw_input('Enter "from address":[support@ITDepartment.com]') or  'support@ITDepartment.com'
 	print('ENTERED:' "%s" % senderAddress + "\n")
-	recipients = raw_input('Enter recipient(s) name: ')
-	print('ENTERED:' "%s" % recipients + "\n")
-	recipientName = raw_input('Enter recipient(s) address: ')
+	recipientName = raw_input('Enter recipient(s) name: ')
 	print('ENTERED:' "%s" % recipientName + "\n")
+	recipientAddress = raw_input('Enter recipient(s) address: ')
+	print('ENTERED:' "%s" % recipientAddress + "\n")
 
 	message = """From: {0} <{1}>
 To: {2} <{3}>
@@ -81,7 +81,7 @@ Subject: smbShakedown.py test.
 <br>
 <img src=file://{4}/image/foo.gif>
 """
-	emailMessage = message.format(senderName, senderAddress, recipientName, recipients, ipAddress)
+	emailMessage = message.format(senderName, senderAddress, recipientName, recipientAddress, ipAddress)
 	print('Email message preview below:')
 	time.sleep(1)
 	print(emailMessage)
