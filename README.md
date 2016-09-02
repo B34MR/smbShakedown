@@ -6,6 +6,34 @@
     git clone https://github.com/NickSanzotta/smbShakedown.git
     cd smbShakedown/
     python smbShakedown.py
+    
+#Usage
+        Launch smbShakedown.py and follow the wizard:
+        
+        Enter SMTP Server address[smtp.gmail.com]: mail.smtp.com
+        ENTERED: "mail.smtp.com"
+
+        Enter your SMTP Server Port[587]: 2525
+        ENTERED: "2525"
+
+        Enter SMTP Server username[user@gmail.com]: beamr@gmail.com
+        ENTERED: "beamr@gmail.com"
+
+        Enter SMTP Server password: 
+
+        Enter SMB Capture Server IP address[10.0.0.7]: 
+        ENTERED:10.0.0.7
+
+        Enter "from name":[IT Support]
+        ENTERED:IT Support
+
+        Enter "from address":[itsupport@company.com]support@company123.com
+        ENTERED:support@company123.com
+
+        Enter recipient(s) name[Bob]: Nick
+        ENTERED:Nick
+        
+        etc..
 
 #External Pentest
     Virtual Private Server (VPS) recommended.
