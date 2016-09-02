@@ -54,7 +54,7 @@ def main():
 	print('ENTERED: "%s"' % smtpServerAddress + "\n")
 	smtpServerPort = raw_input('Enter your SMTP Server Port[587]: ') or 587
 	print('ENTERED: "%s"' % smtpServerPort + "\n")
-	smtpUser = raw_input('Enter SMTP Server username[user@gmail.com]: ') or 'user@gmail.com'
+	smtpUser = raw_input('Enter SMTP Server username[user@gmail.com]: ')
 	print('ENTERED: "%s"' % smtpUser + "\n")
 	smtpPassword = getpass.getpass(r'Enter SMTP Server password: ')
 	print("\n")
@@ -62,11 +62,11 @@ def main():
 	print('ENTERED:' "%s" % smbCaptureServer + "\n")
 	senderName = raw_input('Enter "from name":[IT Support]') or  'IT Support'
 	print('ENTERED:' "%s" % senderName + "\n")
-	senderAddress = raw_input('Enter "from address":[support@ITDepartment.com]') or  'support@ITDepartment.com'
+	senderAddress = raw_input('Enter "from address":[itsupport@company.com]') or  'itsupport@company.com'
 	print('ENTERED:' "%s" % senderAddress + "\n")
-	recipientName = raw_input('Enter recipient(s) name: ')
+	recipientName = raw_input('Enter recipient(s) name[Bob]: ')
 	print('ENTERED:' "%s" % recipientName + "\n")
-	recipientAddress = raw_input('Enter recipient(s) address: ')
+	recipientAddress = raw_input('Enter recipient(s) address[bob@company.com]: ')
 	print('ENTERED:' "%s" % recipientAddress + "\n")
 
 	message = """From: {0} <{1}>
