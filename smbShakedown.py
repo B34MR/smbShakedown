@@ -117,7 +117,7 @@ Subject: smbShakedown.py test.
 <img src=file://{4}/image/foo.gif>
 """
 ##########################################################
-	emailMessage = message.format(senderName, senderAddress, recipientName, recipientAddress, ipAddress)
+	emailMessage = message.format(senderName, senderAddress, recipientName, recipientAddress, smbCaptureServer)
 	print('Email Message Template Below:')
 	time.sleep(1)
 	print(emailMessage)
