@@ -37,7 +37,6 @@
 #To do:
     SMTP Anonymous Auth option
     Add smtplib error handling
-    Pull external IP address.
     Multiple recipient address support.
     SMTP local server option
     Create forked version.
