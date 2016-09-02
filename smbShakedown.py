@@ -16,7 +16,7 @@ def get_ip_address():
 	s.connect(("8.8.8.8", 80))
 	return s.getsockname()[0]
 
-def smtpConn(smtpServerAddress, smtpServerPort, smtpUser, smtpPassword, senderAddress, recipients, emailMessage):
+def smtpConn(smtpServerAddress, smtpServerPort, smtpUser, smtpPassword, senderAddress, recipientAddress, emailMessage):
 	smtpserver = smtplib.SMTP(smtpServerAddress, smtpServerPort)
 	smtpserver.ehlo()
 	smtpserver.starttls()
@@ -33,7 +33,7 @@ def smtpConn(smtpServerAddress, smtpServerPort, smtpUser, smtpPassword, senderAd
 		no = set(['no','n'])
 		print('ENTERED: "%s"' % choice + "\n")
 		if choice in yes:
-			smtpserver.sendmail(senderAddress, recipients, emailMessage)
+			smtpserver.sendmail(senderAddress, recipientAddress, emailMessage)
 			print("Successfully sent message(s)!")
 			#SMTP close/quit
 			smtpserver.quit()
@@ -85,7 +85,7 @@ Subject: smbShakedown.py test.
 	print('Email message preview below:')
 	time.sleep(1)
 	print(emailMessage)
-	smtpConn(smtpServerAddress, smtpServerPort, smtpUser, smtpPassword, senderAddress, recipients, emailMessage)
+	smtpConn(smtpServerAddress, smtpServerPort, smtpUser, smtpPassword, senderAddress, recipientAddress, emailMessage)
 
 if __name__ == "__main__":
 	main()
