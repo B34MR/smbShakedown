@@ -62,11 +62,11 @@ def main():
 	print('ENTERED:' "%s" % smbCaptureServer + "\n")
 	senderName = raw_input('Enter "from name":[IT Support]') or  'IT Support'
 	print('ENTERED:' "%s" % senderName + "\n")
-	senderAddress = raw_input('Enter "from address":[support@nonexistentdomain.com]') or  'support@nonexistentdomain.com'
+	senderAddress = raw_input('Enter "from address":[support@ITDepartments.com]') or  'support@ITDepartments.com'
 	print('ENTERED:' "%s" % senderAddress + "\n")
 	recipients = raw_input('Enter recipient(s) name: ')
 	print('ENTERED:' "%s" % recipientName + "\n")
-	recipients = raw_input('Enter recipient(s) address: ')
+	recipientName = raw_input('Enter recipient(s) address: ')
 	print('ENTERED:' "%s" % recipients + "\n")
 
 	message = """From: {0} <{1}>
