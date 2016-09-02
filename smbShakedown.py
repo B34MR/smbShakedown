@@ -70,7 +70,7 @@ def main():
 	print('ENTERED:' "%s" % recipientName + "\n")
 
 	message = """From: {0} <{1}>
-To: {2}} <{3}>
+To: {2} <{3}>
 MIME-Version: 1.0
 Content-type: text/html
 Subject: smbShakedown.py test.
