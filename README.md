@@ -10,11 +10,11 @@
 #Usage
         Launch smbShakedown.py and follow the wizard:
         
-        Enter SMTP Server address[smtp.gmail.com]: mail.smtp.com
-        ENTERED: "mail.smtp.com"
+        Enter SMTP Server address[smtp.gmail.com]: mail.myrelay.com
+        ENTERED: "mail.myrelay.com"
 
-        Enter your SMTP Server Port[587]: 2525
-        ENTERED: "2525"
+        Enter your SMTP Server Port[587]: 25
+        ENTERED: "25"
 
         Enter SMTP Server username[user@gmail.com]: beamr@gmail.com
         ENTERED: "beamr@gmail.com"
