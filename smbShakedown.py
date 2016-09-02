@@ -27,18 +27,20 @@ def smtpConn(smtpServerAddress, smtpServerPort, smtpUser, smtpPassword, senderAd
 	try:
 		status = smtpserver.noop()[0]
 		print("SMTP Server Status: ",status)
-		sendOption = raw_input("SMTP server connection is Successful, would you like to send mail now?[yes]:") or 'yes'
+		sendOption = raw_input("Connection to SMTP Server is successful, would you like to send mail now?[yes]:") or 'yes'
 		choice = sendOption.lower()
 		yes = set(['yes','y', 'ye', ''])
 		no = set(['no','n'])
 		print('ENTERED: "%s"' % choice + "\n")
 		if choice in yes:
 			smtpserver.sendmail(senderAddress, recipientAddress, emailMessage)
-			print("Successfully sent message(s)!")
+			print("Message(s) sent!")
 			#SMTP close/quit
 			smtpserver.quit()
 			return True
 		elif choice in no:
+			#SMTP close/quit
+			smtpserver.quit()
 			print("Ok no mail sent.")
 			return False
 		else:
@@ -50,6 +52,7 @@ def smtpConn(smtpServerAddress, smtpServerPort, smtpUser, smtpPassword, senderAd
 
 def main():
 	ipAddress = get_ip_address()
+	# Currently this feature is not fully implemented
 	serverOption = raw_input('Use Smarthost or localhost SMTP Server?[smarthost/localhost]: ') or 'smarthost'
 	choice = serverOption.lower()
 	smarthost = set(['smarthost','smart', 's', ''])
