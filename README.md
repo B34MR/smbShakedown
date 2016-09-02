@@ -27,7 +27,8 @@
     EX: Use a VPS
 
 #Internal Pentest
-    1.Configure SMTP Server, Smarthost/localhost/(Client's Email Server?):
+    1.Configure SMTP Server, smarthost/localhost/other:
+    (Looking into intergrating smtpd for local SMTP server option)
     
     2.Enter SMTP Server credentials: 
     (anonymous connections not yet supported.)
