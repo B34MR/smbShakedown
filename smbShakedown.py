@@ -50,6 +50,11 @@ def smtpConn(smtpServerAddress, smtpServerPort, smtpUser, smtpPassword, senderAd
 
 def main():
 	ipAddress = get_ip_address()
+	serverOption = raw_input('Use Smarthost or localhost SMTP Server?[smarthost/localhost]: ') or 'smarthost'
+	choice = serverOption.lower()
+	smarthost = set(['smarthost','smart', 's', ''])
+	localhost = set(['localhost','local', 'l'])
+
 	smtpServerAddress = raw_input('Enter SMTP Server address[smtp.gmail.com]: ') or 'smtp.gmail.com'
 	print('ENTERED: "%s"' % smtpServerAddress + "\n")
 	smtpServerPort = raw_input('Enter your SMTP Server Port[587]: ') or 587
@@ -69,6 +74,8 @@ def main():
 	recipientAddress = raw_input('Enter recipient(s) address[bob@company.com]: ')
 	print('ENTERED:' "%s" % recipientAddress + "\n")
 
+
+### Email Message Template Below, Customize as Needed ###
 	message = """From: {0} <{1}>
 To: {2} <{3}>
 MIME-Version: 1.0
@@ -81,8 +88,9 @@ Subject: smbShakedown.py test.
 <br>
 <img src=file://{4}/image/foo.gif>
 """
+##########################################################
 	emailMessage = message.format(senderName, senderAddress, recipientName, recipientAddress, ipAddress)
-	print('Email message preview below:')
+	print('Email Message Template Below:')
 	time.sleep(1)
 	print(emailMessage)
 	smtpConn(smtpServerAddress, smtpServerPort, smtpUser, smtpPassword, senderAddress, recipientAddress, emailMessage)
