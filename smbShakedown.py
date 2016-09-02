@@ -65,9 +65,9 @@ def main():
 	senderAddress = raw_input('Enter "from address":[support@ITDepartment.com]') or  'support@ITDepartment.com'
 	print('ENTERED:' "%s" % senderAddress + "\n")
 	recipients = raw_input('Enter recipient(s) name: ')
-	print('ENTERED:' "%s" % recipientName + "\n")
-	recipientName = raw_input('Enter recipient(s) address: ')
 	print('ENTERED:' "%s" % recipients + "\n")
+	recipientName = raw_input('Enter recipient(s) address: ')
+	print('ENTERED:' "%s" % recipientName + "\n")
 
 	message = """From: {0} <{1}>
 To: {2}} <{3}>
