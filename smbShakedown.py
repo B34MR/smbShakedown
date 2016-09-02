@@ -3,11 +3,19 @@
 # Created by: Nick Sanzotta / @beamr
 # Version: smbShakedown.py v 1.0
 import os, smtplib, getpass, readline, socket, time
+import urllib, json
 rcfile = 'smbServ.rc'
 
-def get_ip_address():
+
+def get_external_address():
+	data = json.loads(urllib.urlopen("http://ip.jsontest.com/").read())
+	print("External IP: "+data["ip"])
+	return data["ip"]
+
+def get_internal_address():
 	s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 	s.connect(("8.8.8.8", 80))
+	print("Internal IP: "+s.getsockname()[0])
 	return s.getsockname()[0]
 
 def smbServ():
@@ -65,8 +73,12 @@ def smtpConn(smtpServerAddress, smtpServerPort, smtpUser, smtpPassword, senderAd
 	return True if status == 250 else False
 
 def main():
-	ipAddress = get_ip_address()
-	# Currently this feature is not fully implemented
+	# In progress
+	extipAddress = get_external_address()
+	ipAddress = get_internal_address()
+	print("\n")
+
+	# In progress
 	# serverOption = raw_input('Use Smarthost or localhost SMTP Server?[smarthost/localhost]: ') or 'smarthost'
 	# choice = serverOption.lower()
 	# smarthost = set(['smarthost','smart', 's', ''])
