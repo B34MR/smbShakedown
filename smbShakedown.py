@@ -2,19 +2,25 @@
 # Description: A simplified SMB Email Client Attack script used for External/Internal pentests.
 # Created by: Nick Sanzotta / @beamr
 # Version: smbShakedown.py v 1.0
-
-#To do:
-#SMTP Auth option
-#MSF Console option(auxiliary/server/capture/smb)
-#Multiple recipient address support.
-#SMTP local server option
-#Fork
 import smtplib, getpass, readline, socket, time
 
 def get_ip_address():
 	s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 	s.connect(("8.8.8.8", 80))
 	return s.getsockname()[0]
+
+def smbServ():
+	smbServOption = raw_input("Launch Metasploit's SMB Capture module?[yes]:") or 'yes'
+	choice = smbServOption.lower()
+	yes = set(['yes','y', 'ye', ''])
+	no = set(['no','n'])
+	print('ENTERED: "%s"' % choice + "\n")
+	if choice in yes:
+
+	elif choice in no:
+
+	else:
+
 
 def smtpConn(smtpServerAddress, smtpServerPort, smtpUser, smtpPassword, senderAddress, recipientAddress, emailMessage):
 	smtpserver = smtplib.SMTP(smtpServerAddress, smtpServerPort)
@@ -53,10 +59,10 @@ def smtpConn(smtpServerAddress, smtpServerPort, smtpUser, smtpPassword, senderAd
 def main():
 	ipAddress = get_ip_address()
 	# Currently this feature is not fully implemented
-	serverOption = raw_input('Use Smarthost or localhost SMTP Server?[smarthost/localhost]: ') or 'smarthost'
-	choice = serverOption.lower()
-	smarthost = set(['smarthost','smart', 's', ''])
-	localhost = set(['localhost','local', 'l'])
+	# serverOption = raw_input('Use Smarthost or localhost SMTP Server?[smarthost/localhost]: ') or 'smarthost'
+	# choice = serverOption.lower()
+	# smarthost = set(['smarthost','smart', 's', ''])
+	# localhost = set(['localhost','local', 'l'])
 
 	smtpServerAddress = raw_input('Enter SMTP Server address[smtp.gmail.com]: ') or 'smtp.gmail.com'
 	print('ENTERED: "%s"' % smtpServerAddress + "\n")
