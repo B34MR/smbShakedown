@@ -37,6 +37,7 @@
 #To do:
     SMTP Anonymous Auth option
     Add smtplib error handling
+    Pull external IP address.
     Option to automagically launch MSF Console (auxiliary/server/capture/smb)
     Multiple recipient address support.
     SMTP local server option
