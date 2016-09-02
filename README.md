@@ -5,7 +5,6 @@
 #Installation
     git clone https://github.com/NickSanzotta/smbShakedown.git
     cd smbShakedown/
-    chmod +x smbShakedown.py
     python smbShakedown.py
 
 #External Pentest
