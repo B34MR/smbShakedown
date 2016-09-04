@@ -4,13 +4,14 @@
     Version: smbShakedown.py v 1.0
   
     
-Installation
+Installation:
 ***
     git clone https://github.com/NickSanzotta/smbShakedown.git
     cd smbShakedown/
     python smbShakedown.py
+
+Usage:
 ***
-#Usage
     1.Enter SMTP Server address:
     
     2.Enter SMTP Server credentials: 
@@ -24,8 +25,8 @@ Installation
     
     5. Choose whether or not to launch Metasploit's SMB Capture server.
 
-#Example
-        
+Example:
+***        
         Enter SMTP Server address[smtp.gmail.com]: 
         ENTERED: "smtp.gmail.com"
 
@@ -51,8 +52,8 @@ Installation
         
         etc..
         
-#To update email template modify the following in source:
- 
+To update email template modify the following in source:
+*** 
     ### EDIT: Email Message Template Below ###
 	message = """From: {0} <{1}>
     To: {2} <{3}>
@@ -68,7 +69,8 @@ Installation
     """
     ##########################################################
 
-#To do:
+To do:
+***
     Add error handling.
 
 
