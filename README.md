@@ -8,11 +8,10 @@
     python smbShakedown.py
     
 #Usage
-    1.Configure SMTP Server, smarthost/localhost/other:
-    (Looking into intergrating smtpd for local SMTP server option)
+    1.Enter SMTP Server address:
     
     2.Enter SMTP Server credentials: 
-    (anonymous connections not yet supported.)
+    (anonymous connections not supported.)
     
     3.Configure "from" and "to" addresses:
     (separate multiple email addresses with a comma)
@@ -52,6 +51,20 @@
 #To update email template modify the follow:
     ...
     ...
+    ### EDIT: Email Message Template Below ###
+	message = """From: {0} <{1}>
+    To: {2} <{3}>
+    MIME-Version: 1.0
+    Content-type: text/html
+    Subject: smbShakedown.py test.
+
+
+    ...
+    <b>smbShakedown.py test message.</b>
+    <br>
+    <img src=file://{4}/image/foo.gif>
+    """
+    ##########################################################
 
 #To do:
     Add error handling.
