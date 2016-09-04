@@ -15,6 +15,7 @@
     (anonymous connections not yet supported.)
     
     3.Configure "from" and "to" addresses:
+    (separate multiple email addresses with a comma)
     
     4.Enter SMBCapture Server IP address, so it can be placed in body of email:
     EX: <img src=file://127.0.0.1/image/foo.gif>
@@ -53,7 +54,7 @@
     ...
 
 #To do:
-    Multiple recipient address support.
-    SMTP Anonymous Auth option
     Add error handling.
+    SMTP Auth option.
+
 
