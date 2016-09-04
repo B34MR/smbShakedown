@@ -1,5 +1,5 @@
 #/usr/bin/python
-# Description: A simplified SMB Email Client Attack script.
+# Description: A simplified SMB Email Client Attack script used for pentests.
 # Created by: Nick Sanzotta / @beamr
 # Version: smbShakedown.py v 1.0
 import os, smtplib, getpass, readline, socket, time
