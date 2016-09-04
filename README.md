@@ -47,6 +47,10 @@
         ENTERED:Bob
         
         etc..
+        
+#To update email template modify the follow:
+    ...
+    ...
 
 #To do:
     Multiple recipient address support.
