@@ -6,7 +6,6 @@ import os, smtplib, getpass, readline, socket, time
 import urllib, json
 rcfile = 'smbServ.rc'
 
-
 def get_external_address():
 	data = json.loads(urllib.urlopen("http://ip.jsontest.com/").read())
 	print("External IP: "+data["ip"])
@@ -35,8 +34,6 @@ def smbServ():
 
 	else:
 		sys.stdout.write("Please respond with 'yes' or 'no'")
-
-
 
 def smtpConn(smtpServerAddress, smtpServerPort, smtpUser, smtpPassword, senderAddress, recipientAddress, emailMessage):
 	smtpserver = smtplib.SMTP(smtpServerAddress, smtpServerPort)
@@ -73,16 +70,9 @@ def smtpConn(smtpServerAddress, smtpServerPort, smtpUser, smtpPassword, senderAd
 	return True if status == 250 else False
 
 def main():
-	# In progress
 	extipAddress = get_external_address()
 	ipAddress = get_internal_address()
 	print("\n")
-
-	# In progress
-	# serverOption = raw_input('Use Smarthost or localhost SMTP Server?[smarthost/localhost]: ') or 'smarthost'
-	# choice = serverOption.lower()
-	# smarthost = set(['smarthost','smart', 's', ''])
-	# localhost = set(['localhost','local', 'l'])
 	smtpServerAddress = raw_input('Enter SMTP Server address[smtp.gmail.com]: ') or 'smtp.gmail.com'
 	print('ENTERED: "%s"' % smtpServerAddress + "\n")
 	smtpServerPort = raw_input('Enter your SMTP Server Port[587]: ') or 587
@@ -95,7 +85,7 @@ def main():
 	print('ENTERED:' "%s" % smbCaptureServer + "\n")
 	senderName = raw_input('Enter "from name":[IT Support]') or  'IT Support'
 	print('ENTERED:' "%s" % senderName + "\n")
-	senderAddress = raw_input('Enter "from address":[itsupport@company.com]') or  'itsupport@company.com'
+	senderAddress = raw_input('Enter "from address":['+smtpUser+']') or  smtpUser
 	print('ENTERED:' "%s" % senderAddress + "\n")
 	recipientName = raw_input('Enter recipient(s) name[Bob]: ')
 	print('ENTERED:' "%s" % recipientName + "\n")
@@ -103,7 +93,7 @@ def main():
 	print('ENTERED:' "%s" % recipientAddress + "\n")
 
 
-### Email Message Template Below, Customize as Needed ###
+### EDIT: Email Message Template Below ###
 	message = """From: {0} <{1}>
 To: {2} <{3}>
 MIME-Version: 1.0
