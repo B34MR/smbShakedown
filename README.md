@@ -48,9 +48,8 @@
         
         etc..
         
-#To update email template modify the follow:
-    ...
-    ...
+#To update email template modify the following in source:
+ 
     ### EDIT: Email Message Template Below ###
 	message = """From: {0} <{1}>
     To: {2} <{3}>
