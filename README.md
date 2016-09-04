@@ -67,6 +67,5 @@
 
 #To do:
     Add error handling.
-    SMTP Auth option.
 
 
