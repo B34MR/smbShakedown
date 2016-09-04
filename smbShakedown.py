@@ -1,5 +1,5 @@
 #/usr/bin/python
-# Description: A simplified SMB Email Client Attack script used for External/Internal pentests.
+# Description: A simplified SMB Email Client Attack script.
 # Created by: Nick Sanzotta / @beamr
 # Version: smbShakedown.py v 1.0
 import os, smtplib, getpass, readline, socket, time
@@ -54,11 +54,9 @@ def smtpConn(smtpServerAddress, smtpServerPort, smtpUser, smtpPassword, senderAd
 		if choice in yes:
 			smtpserver.sendmail(senderAddress, recipientAddress, emailMessage)
 			print("Message(s) sent!")
-			#SMTP close/quit
 			smtpserver.quit()
 			return True
 		elif choice in no:
-			#SMTP close/quit
 			smtpserver.quit()
 			print("Ok no mail sent.")
 			return False
