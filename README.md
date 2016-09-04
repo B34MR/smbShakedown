@@ -69,8 +69,7 @@
     EX: Metasploit's SMB Capture server can be configured to automatically launch.
 
 #To do:
-    SMTP Anonymous Auth option
-    Add smtplib error handling
     Multiple recipient address support.
-    SMTP local server option
-    Create forked version.
+    SMTP Anonymous Auth option
+    Add error handling.
+    fork.
