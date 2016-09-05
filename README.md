@@ -53,7 +53,7 @@ Example:
         etc..
         
 To update email template modify the following in source:
-Becareful not to remove the variables {0},{1},{2},{3} and {4} and 
+Becareful not to remove the variables {0},{1},{2},{3} and {4}
 *** 
     ### EDIT: Email Message Template Below ###
 	message = """From: {0} <{1}>
