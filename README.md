@@ -3,15 +3,16 @@
     Created by: Nick Sanzotta / @beamr
     Version: smbShakedown.py v 1.0
   
-    
+***  
 Installation:
-***
+
     git clone https://github.com/NickSanzotta/smbShakedown.git
     cd smbShakedown/
     python smbShakedown.py
 
-Usage:
 ***
+Usage:
+
     1.Enter SMTP Server address:
     
     2.Enter SMTP Server credentials: 
@@ -25,8 +26,9 @@ Usage:
     
     5. Choose whether or not to launch Metasploit's SMB Capture server.
 
+***
 Example:
-***        
+       
         Enter SMTP Server address[smtp.gmail.com]: 
         ENTERED: "smtp.gmail.com"
 
@@ -51,10 +53,11 @@ Example:
         ENTERED:Bob
         
         etc..
-        
+
+***        
 To update email template modify the following in source:
 Becareful not to remove the variables {0},{1},{2},{3} and {4}
-*** 
+
     ### EDIT: Email Message Template Below ###
 	message = """From: {0} <{1}>
     To: {2} <{3}>
@@ -70,8 +73,9 @@ Becareful not to remove the variables {0},{1},{2},{3} and {4}
     """
     ##########################################################
 
-To do:
 ***
+To do:
+
 	Add file support for recipients
 	Add error handling.
 
