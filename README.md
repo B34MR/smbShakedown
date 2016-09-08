@@ -72,6 +72,7 @@ Becareful not to remove the variables {0},{1},{2},{3} and {4}
 
 To do:
 ***
-    Add error handling.
+	Add file support for recipients
+	Add error handling.
 
 
