@@ -1,12 +1,47 @@
 #/usr/bin/python
 # Description: A simplified SMB Email Client Attack script.
 # Created by: Nick Sanzotta / @beamr
-# Version: smbShakedown.py v 1.9102016
+# Version: smbShakedown.py v 1.9112016
 import os, sys, smtplib, getpass, readline, socket, time
 import urllib, json
-rcfile = 'smbServ.rc'
 import readline
 readline.parse_and_bind("tab: complete")
+
+rcfile = 'smbServ.rc'
+
+class colors:
+   white = "\033[1;37m"
+   normal = "\033[0;00m"
+   red = "\033[1;31m"
+   blue = "\033[1;34m"
+   green = "\033[1;32m"
+   x = "\033[1;35m"
+
+banner = colors.x + r"""
+                  __        
+                 /\ \       
+  ____    ___ ___\ \ \____  
+ /',__\ /' __` __`\ \ '__`\ 
+/\__, `\/\ \/\ \/\ \ \ \L\ \
+\/\____/\ \_\ \_\ \_\ \_,__/
+ \/___/  \/_/\/_/\/_/\/___/ 
+
+ ____    __                __                 __                                 
+/\  _`\ /\ \              /\ \               /\ \                                
+\ \,\L\_\ \ \___      __  \ \ \/'\      __   \_\ \    ___   __  __  __    ___    
+ \/_\__ \\ \  _ `\  /'__`\ \ \ , <    /'__`\ /'_` \  / __`\/\ \/\ \/\ \ /' _ `\  
+   /\ \L\ \ \ \ \ \/\ \L\.\_\ \ \\`\ /\  __//\ \L\ \/\ \L\ \ \ \_/ \_/ \/\ \/\ \ 
+   \ `\____\ \_\ \_\ \__/.\_\\ \_\ \_\ \____\ \___,_\ \____/\ \___x___/'\ \_\ \_\
+    \/_____/\/_/\/_/\/__/\/_/ \/_/\/_/\/____/\/__,_ /\/___/  \/__//__/   \/_/\/_/
+
+"""+'\n' \
++ colors.x + '\n smbShakedown.py v1.9112016' \
++ colors.normal + '\n Description: A simplified SMB Email Client Attack script.'\
++ colors.normal + '\n Created by: Nick Sanzotta/@beamr' + '\n'\
++ colors.normal + ' ' + '*' * 95 +'\n' + colors.normal
+
+def cls():
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 def get_external_address():
 	data = json.loads(urllib.urlopen("http://ip.jsontest.com/").read())
@@ -69,6 +104,8 @@ def smtpConn(smtpServerAddress, smtpServerPort, smtpUser, smtpPassword, senderAd
 	return True if status == 250 else False
 
 def main():
+	cls()
+	print(banner)
 	extipAddress = get_external_address()
 	ipAddress = get_internal_address()
 	print("\n")
