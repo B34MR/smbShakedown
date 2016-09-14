@@ -117,7 +117,7 @@ def main():
 	print('ENTERED: "%s"' % smtpUser + "\n")
 	smtpPassword = getpass.getpass(r'Enter SMTP Server password: ')
 	print("\n")
-	smbCaptureServer = raw_input('Enter SMB Capture Server IP address['+ipAddress+']: ') or  ipAddress
+	smbCaptureServer = raw_input('Enter SMB Capture Server IP address['+extipAddress+']: ') or  extipAddress
 	print('ENTERED:' "%s" % smbCaptureServer + "\n")
 	senderName = raw_input('Enter "from name":[Tester]') or  'Tester'
 	print('ENTERED:' "%s" % senderName + "\n")
