@@ -92,11 +92,11 @@ Example:
 
 ***        
 To update email template modify the following in source:
-Becareful not to remove the variables {0},{1},{2},{3} and {4}
+Becareful not to remove the variables {0},{1},{2} and {3}
 
     ### EDIT: Email Message Template Below ###
 	message = """From: {0} <{1}>
-    To: {2} <{3}>
+    To: {2}
     MIME-Version: 1.0
     Content-type: text/html
     Subject: smbShakedown.py test.
@@ -105,7 +105,7 @@ Becareful not to remove the variables {0},{1},{2},{3} and {4}
     ...
     <b>smbShakedown.py test message.</b>
     <br>
-    <img src=file://{4}/image/foo.gif>
+    <img src=file://{3}/image/foo.gif>
     """
     ##########################################################
 
