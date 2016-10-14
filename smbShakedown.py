@@ -1,7 +1,7 @@
 #/usr/bin/python
 # Description: A simplified SMB Email Client Attack script.
 # Created by: Nick Sanzotta / @beamr
-# Version: smbShakedown.py v 1.9222016
+# Version: smbShakedown.py v 1.10142016
 import os, sys, smtplib, getpass, readline, socket, time
 import urllib, json
 import readline
@@ -35,7 +35,7 @@ banner = colors.x + r"""
     \/_____/\/_/\/_/\/__/\/_/ \/_/\/_/\/____/\/__,_ /\/___/  \/__//__/   \/_/\/_/
 
 """+'\n' \
-+ colors.x + '\n smbShakedown.py v1.9222016' \
++ colors.x + '\n smbShakedown.py v1.10142016' \
 + colors.normal + '\n Description: A simplified SMB Email Client Attack script.'\
 + colors.normal + '\n Created by: Nick Sanzotta/@beamr' + '\n'\
 + colors.normal + ' ' + '*' * 95 +'\n' + colors.normal
@@ -106,7 +106,11 @@ def smtpConn(smtpServerAddress, smtpServerPort, smtpUser, smtpPassword, senderAd
 def main():
 	cls()
 	print(banner)
-	extipAddress = get_external_address()
+	try:
+		extipAddress = get_external_address()
+	except IOError:
+		print("Check your Internet connection")
+		sys.exit(0)
 	ipAddress = get_internal_address()
 	print("\n")
 	smtpServerAddress = raw_input('Enter SMTP Server address[smtp.gmail.com]: ') or 'smtp.gmail.com'
