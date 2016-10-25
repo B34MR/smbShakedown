@@ -4,6 +4,16 @@
     Version: smbShakedown.py v 1.10252016.b
   
 ***  
+INFO 10-25-16:
+	
+	README.MD / Help file are outdated.
+	ADDED Option to Spoof Recipient header. (Also helps avoid orange "?" in Outlook)
+	ADDED Option to insert HyperLink.
+	ADDED HTTP Server feature to host a Web page with the HTML IMG SRC TAG.
+	ADDED REDIRECT OPTION FOR HTTP SERVER.(Redirect back to client's site) - currently broken, working on a fix.
+  	
+  
+***  
 Installation:
 
     git clone https://github.com/NickSanzotta/smbShakedown.git
