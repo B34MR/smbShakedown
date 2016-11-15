@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-
 # Description: A simplified SMB Email Client Attack script.
 # Created by: Nick Sanzotta / @beamr
 # Version: smbShakedown.py v 1.10252016.b
