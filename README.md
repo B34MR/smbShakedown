@@ -38,6 +38,7 @@ Usage:
 
 ***
 Note: 
+
 	If using Google's SMTP servers, ensure you have enabled "Less Secure Apps".
 
 
