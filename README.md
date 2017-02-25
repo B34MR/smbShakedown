@@ -44,7 +44,8 @@ Note:
 	Path: https://www.google.com/settings/security/lesssecureapps
 	EX: Allow less secure apps: ON
 	
-	Please be aware this setting is not available for accounts with 2-Step Verification enabled. Such accounts require an 	      application-specific password for less secure apps access.
+	Please be aware this setting is not available for accounts with 2-Step Verification enabled. 
+	Such accounts require an application-specific password for less secure apps access.
 
 
 ***
