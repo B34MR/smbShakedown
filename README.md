@@ -39,7 +39,12 @@ Usage:
 ***
 Note: 
 
-	If using Google's SMTP servers, ensure you have enabled "Less Secure Apps".
+	If using Google's SMTP servers, ensure you have enabled "Less Secure Apps" on your account.
+	
+	Path: https://www.google.com/settings/security/lesssecureapps
+	EX: Allow less secure apps: ON
+	
+	Please be aware this setting is not available for accounts with 2-Step Verification enabled. Such accounts require an 	      application-specific password for less secure apps access.
 
 
 ***
