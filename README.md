@@ -37,6 +37,10 @@ Usage:
     5. Choose whether or not to launch Metasploit's SMB Capture server.
 
 ***
+Note: If using Google's SMTP servers, ensure you have enabled "Less Secure Apps".
+
+
+***
 Example:
        
 	External IP: 100.100.100.100
