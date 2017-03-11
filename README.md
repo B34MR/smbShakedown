@@ -1,4 +1,4 @@
-#smbShakedown.py
+#smbShakedown ![Supported Python versions](https://img.shields.io/badge/python-2.7-blue.svg)
     Description: A simplified SMB Email Client Attack script used for pentests.
     Created by: Nick Sanzotta / @beamr
     Version: smbShakedown.py v 1.10252016.b
