@@ -55,6 +55,19 @@ def get_internal_address():
 	print("Internal IP: "+s.getsockname()[0])
 	return s.getsockname()[0]
 
+def yes_no(answer):
+    yes = set(['yes','y', 'ye', ''])
+    no = set(['no','n'])
+     
+    while True:
+        choice = raw_input(answer).lower()
+        if choice in yes:
+           return True
+        elif choice in no:
+           return False
+        else:
+            print ('Please respond with \'yes\' or \'no\'\n')
+
 def smbServ():
 	smbServOption = raw_input("\nLaunch Metasploit's SMB Capture module?[yes]:") or 'yes'
 	choice = smbServOption.lower()
@@ -114,7 +127,8 @@ def main():
 		print("Check your Internet connection")
 		sys.exit(0)
 	ipAddress = get_internal_address()
-	ipAddress = get_internal_address()
+	#duplicate
+	#ipAddress = get_internal_address()
 	print("\n")
 	smtpServerAddress = raw_input('Enter SMTP Server address[smtp.gmail.com]: ') or 'smtp.gmail.com'
 	print('ENTERED: "%s"' % smtpServerAddress + "\n")
@@ -150,12 +164,18 @@ def main():
 	print('ENTERED:' "%s" % smbCaptureServer + "\n")
 	#HYPER LINK OPTIONS
 	print('TIP: A HyperLink can be directed to an Webpage with an HTML IMG Tag.')
-	hyperLinkOption = raw_input('Would you like to add a HyperLink to your message?[yes]: ') or 'yes'
-	print('ENTERED:' "%s" % hyperLinkOption + "\n")
+
+	#use yes_no function instead of inline
+	#hyperLinkOption = raw_input('Would you like to add a HyperLink to your message?[yes]: ') or 'yes'
+	hyperLinkOption = yes_no('Would you like to add a HyperLink to your message? (y/n): ')
+
+	'''print('ENTERED:' "%s" % hyperLinkOption + "\n")
 	choice = hyperLinkOption.lower()
 	yes = set(['yes','y', 'ye', ''])
 	no = set(['no','n'])
-	if choice in yes:
+	if choice in yes:'''
+
+	if hyperLinkOption is True:
 		print('TIP: Domain based HyperLinks help avoid the "JunkFolder".')
 		hyperAddress = raw_input('Please enter a addresss without "http://": ['+extipAddress+']:' ) or extipAddress
 		print("ENTERED: " "%s" % "http://"+hyperAddress+"/" + "\n")
@@ -164,30 +184,43 @@ def main():
 		hyperLink = '<a href="http://'+hyperAddress+'/" target="_blank">'+hyperText+'</a>' 
 		#HTTP Server OPTIONS
 		print('TIP: You can point your HyperLink to a locally hosted Webpage.')
-		httpServOption = raw_input("Host local Webpage with an HTML IMG Tag?[yes]: ") or 'yes'
-		print('ENTERED:' "%s" % httpServOption + "\n")
+		
+
+		#use yes_no function instead of inline
+		#httpServOption = raw_input("Host local Webpage with an HTML IMG Tag?[yes]: ") or 'yes'
+		
+		httpServOption = yes_no('Host local Webpage with an HTML IMG Tag? (y/n)? ')
+		'''print('ENTERED:' "%s" % httpServOption + "\n")
 		choice = httpServOption.lower()
 		yes = set(['yes','y', 'ye', ''])
 		no = set(['no','n'])
-		if choice in yes:
+		if choice in yes:'''
+		if httpServOption is True:
 			httpPort = raw_input("HTTP Server Port?:[80]") or 80
 			print('ENTERED:' "%s" % httpPort + "\n")
 			print("\n")
 			print("TIP: Coming soon...")
 			#Redirect OPTIONS
-			redirectOption = raw_input("Would you like a redirect on your Webpage?[yes]:") or 'yes'
-			print('ENTERED:' "%s" % redirectOption + "\n")
+			
+			#use yes_no function instead of inline
+			#redirectOption = raw_input("Would you like a redirect on your Webpage?[yes]:") or 'yes'
+			redirectOption = yes_no('Would you like a redirect on your Webpage? (y/n): ')
+
+			'''print('ENTERED:' "%s" % redirectOption + "\n")
 			choice = redirectOption.lower()
 			yes = set(['yes','y', 'ye', ''])
 			no = set(['no','n'])
-			if choice in yes:
+			if choice in yes:'''
+
+			if redirectOption is True:
 				redirect = raw_input('Enter redirect address[ex: client-site.com]:') or ''
 				print('ENTERED:' "%s" % redirect + "\n")
-			elif choice in no:
+			elif redirectOption is False:
 				print('Okay, Webpage will not redirect:')
 				redirect = ''
-			else:
-				sys.stdout.write("Please respond with 'yes' or 'no'")
+			'''else:
+				sys.stdout.write("Please respond with 'yes' or 'no'")'''
+				
 		### EDIT: HTML Template Below ###
 		### Becareful not to remove the variables {0} and {1} ###
 			html = """
