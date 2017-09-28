@@ -90,6 +90,8 @@ def smbServ():
 				"set JOHNPWFILE /opt/smbShakedown/smb_hashes"+"\n"+\
 				"exploit -j -z")
 		os.system('msfconsole -q -r smbServ.rc')
+	else:
+		print("Ok, remember to setup your SMBCapture Server elsewhere. \n")
 	
 
 	'''elif choice in no:
@@ -97,8 +99,7 @@ def smbServ():
 	else:
 		sys.stdout.write("Please respond with 'yes' or 'no'")'''
 
-	elif smbServOption is False:
-		print("Ok, remember to setup your SMBCapture Server elsewhere. \n")
+
 
 
 def smtpConn(smtpServerAddress, smtpServerPort, smtpUser, smtpPassword, senderAddress, recipientAddress, emailMessage):
@@ -248,7 +249,7 @@ def main():
 			if redirectOption is True:
 				redirect = raw_input('Enter redirect address[ex: client-site.com]:') or ''
 				print('ENTERED:' "%s" % redirect + "\n")
-			elif redirectOption is False:
+			else:
 				print('Okay, Webpage will not redirect:')
 				redirect = ''
 			'''else:
@@ -287,17 +288,17 @@ def main():
 			server_process.start()
 			print("Python SimpleHTTPServer now Listening on Port: " + str(httpPort))
 			print("\n")
-		elif choice in no:
-			print('Ok local HTTP Server not started: \n')
 		else:
-			sys.stdout.write("Please respond with 'yes' or 'no'")
+			print('Ok local HTTP Server not started: \n')
+		'''else:
+			sys.stdout.write("Please respond with 'yes' or 'no'")'''
 			
 	
-	elif choice in no:
+	else:
 		print('Okay, A Hyplink will not be added to your message: \n')
 		hyperLink = ''
-	else:
-		sys.stdout.write("Please respond with 'yes' or 'no'")
+	'''else:
+		sys.stdout.write("Please respond with 'yes' or 'no'")'''
 
 	
 ### EDIT: Email Message Template Below ###
