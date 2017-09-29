@@ -2,7 +2,7 @@
 # Description: A simplified SMB Email Client Attack script.
 # Created by: Nick Sanzotta / @beamr
 # Version: smbShakedown.py v 1.10252016.b
-import os, sys, smtplib, getpass, readline, socket, time
+import os, sys, smtplib, getpass, readline, socket, time, subprocess
 import urllib, json
 import readline
 readline.parse_and_bind("tab: complete")
