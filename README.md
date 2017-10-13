@@ -1,28 +1,33 @@
-#smbShakedown ![Supported Python versions](https://img.shields.io/badge/python-2.7-blue.svg)
-    Description: A simplified SMB Email Client Attack script used for pentests.
+![Supported Python versions](https://img.shields.io/badge/python-2.7-blue.svg)
+# smbShakedown
+    Description: 
     Created by: Nick Sanzotta / @beamr
-    Version: smbShakedown.py v 1.10252016.b
-  
-***  
-INFO 10-25-16:
-	
-	README.MD / Help file are outdated.
-	ADDED Option to Spoof Recipient header. (Also helps avoid orange "?" in Outlook)
-	ADDED Option to insert HyperLink.
-	ADDED HTTP Server feature to host a Web page with the HTML IMG SRC TAG.
-	ADDED REDIRECT OPTION FOR HTTP SERVER.(Redirect back to client's site) - currently broken, working on a fix.
-  	
-  
-***  
-Installation:
+    Version: 2.0
 
-    git clone https://github.com/NickSanzotta/smbShakedown.git
-    cd smbShakedown/
-    python smbShakedown.py
 
-***
-Usage:
+## :book: smbShakedown Wiki
+   [Main](https://127.0.0.1/) _In Progress_ <br>
 
+
+## :white_check_mark: Installation
+    OS Requirements: 
+	Kali Rolling
+###
+    Dependencies:
+
+###
+    Install:
+        git clone https://github.com/NickSanzotta/smbShakedown.git
+        cd smbShakedown/
+        python smbShakedown.py
+
+###
+     Run:
+
+## :x: Uninstall
+
+
+## :pencil: Cheat Sheet
     1.Enter SMTP Server address:
     
     2.Enter SMTP Server credentials: 
@@ -35,9 +40,8 @@ Usage:
     EX: <img src=file://127.0.0.1/image/foo.gif>
     
     5. Choose whether or not to launch Metasploit's SMB Capture server.
-
-***
-Note: 
+  
+## Note: 
 
 	If using Google's SMTP servers, ensure you have enabled "Less Secure Apps" on your account.
 	
@@ -131,9 +135,11 @@ Becareful not to remove the variables {0},{1},{2} and {3}
     """
     ##########################################################
 
-***
-To do:
 
-	Add error handling.
+## :beers: Credits
+	Contributor(s):
+	Beta Testers:              
+    
+## Disclaimer
 
-
+***smbShakedown is intended to be used for legal security purposes only, any other use is not the responsibility of the developer(s). ***

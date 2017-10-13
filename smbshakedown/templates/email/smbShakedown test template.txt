@@ -1,0 +1,10 @@
+#DO NOT REMOVE
+#DO NOT REMOVE
+#DO NOT REMOVE
+#DO NOT REMOVE
+Subject: smbShakedown's test template.
+
+Hello,
+This is smbShakedown's built-in test template.
+<br>
+#DO NOT REMOVE
