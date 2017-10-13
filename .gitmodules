@@ -1,0 +1,3 @@
+[submodule "smbshakedown/thirdparty"]
+	path = smbshakedown/thirdparty
+	url = https://github.com/CoreSecurity/impacket.git
