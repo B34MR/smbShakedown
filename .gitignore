@@ -1,3 +1,7 @@
+#Project data
+smbshakedown/emails.txt
+smbshakedown/emails.csv
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
