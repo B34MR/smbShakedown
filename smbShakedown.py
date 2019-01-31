@@ -44,8 +44,10 @@ banner = colors.x + r"""
 def cls():
     os.system('cls' if os.name == 'nt' else 'clear')
 
+### ip.jsontest.com is no longer responding correctly ###
+### Updated to use https://api.ipify.org?format=json ###
 def get_external_address():
-	data = json.loads(urllib.urlopen("http://ip.jsontest.com/").read())
+	data = json.loads(urllib.urlopen("https://api.ipify.org?format=json").read())
 	print("External IP: "+data["ip"])
 	return data["ip"]
 
